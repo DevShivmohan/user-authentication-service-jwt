@@ -1,5 +1,7 @@
 package com.user.auth.exception;
 
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.MalformedJwtException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +39,18 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<?> handleSQLIntegrityConstraintViolationException(SQLIntegrityConstraintViolationException sqlIntegrityConstraintViolationException){
         log.error(sqlIntegrityConstraintViolationException.getMessage());
         return ResponseEntity.status(HttpStatus.IM_USED).body("User already exists in our database");
+    }
+
+    @ExceptionHandler(MalformedJwtException.class)
+    public ResponseEntity<?> handleMalformedJwtException(MalformedJwtException malformedJwtException){
+        log.error(malformedJwtException.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Invalid jwt token");
+    }
+
+    @ExceptionHandler(ExpiredJwtException.class)
+    public ResponseEntity<?> handleExpiredJwtException(ExpiredJwtException expiredJwtException){
+        log.error(expiredJwtException.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Token expired");
     }
 
 
