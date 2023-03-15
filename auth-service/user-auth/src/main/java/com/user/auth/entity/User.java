@@ -1,14 +1,20 @@
 package com.user.auth.entity;
 
+import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.Set;
 
 @Entity
 @Data
 @Table(name = "user")
+@Builder
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,10 +1,16 @@
 package com.user.auth.controllers;
 
+import com.user.auth.entity.Role;
 import com.user.auth.entity.User;
+import com.user.auth.model.UserReqDTO;
 import com.user.auth.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.HashSet;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/user")
@@ -14,12 +20,14 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    public ResponseEntity<?> addUser(@RequestBody User user){
-        return userService.addUser(user);
+    public ResponseEntity<?> addUser(@Valid @RequestBody UserReqDTO userReqDTO){
+        return userService.addUser(User.builder().name(userReqDTO.getName()).username(userReqDTO.getUsername())
+                        .password(userReqDTO.getPassword())
+                .build());
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<?> updateUser(@RequestBody User user,@PathVariable("id") long id){
+    public ResponseEntity<?> updateUser(@Valid @RequestBody User user,@PathVariable("id") long id){
         return userService.updateUser(user,id);
     }
 
