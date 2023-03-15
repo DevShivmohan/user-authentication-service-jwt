@@ -5,12 +5,12 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
-import io.jsonwebtoken.io.Encoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import javax.xml.bind.DatatypeConverter;
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
@@ -21,7 +21,7 @@ import java.util.function.Function;
 @Component
 public class JwtUtil {
 
-    public static final String SECRET = "19856D910C55CC30D6D65E031F5C5E0884585D07ED702536B3A60877DFC60E56";
+    public static final String SECRET = "Shivmohan52415241$$56235fgfgfgfgfgh6212";
 
 
     public String extractUsername(String token) {
@@ -88,7 +88,7 @@ public class JwtUtil {
     }
 
     private Key getSignKey() {
-        byte[] keyBytes= Decoders.BASE64.decode(SECRET);
+        byte[] keyBytes= Decoders.BASE64.decode(DatatypeConverter.printHexBinary(SECRET.getBytes()));
         return Keys.hmacShaKeyFor(keyBytes);
     }
 }

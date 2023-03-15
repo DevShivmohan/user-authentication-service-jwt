@@ -1,6 +1,5 @@
 package com.user.auth.controllers;
 
-import com.user.auth.entity.Role;
 import com.user.auth.entity.User;
 import com.user.auth.model.UserReqDTO;
 import com.user.auth.service.UserService;
@@ -9,8 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashSet;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/user")
